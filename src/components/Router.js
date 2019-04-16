@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Posts from "./Posts";
+import SinglePost from "./SinglePost";
 
 class Router extends Component {
   state = {
@@ -24,9 +25,17 @@ class Router extends Component {
             <Switch>
               <Route
                 exact
-                path={"/"}
+                path="/"
                 render={() => {
                   return <Posts posts={this.state.posts} />;
+                }}
+              />
+              <Route
+                exact
+                path="/posts/:postId"
+                render={props => {
+                  let idPost = props.match.params.postId;
+                  return <SinglePost />;
                 }}
               />
             </Switch>
