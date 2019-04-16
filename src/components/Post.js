@@ -1,8 +1,22 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 class Post extends Component {
-  state = {};
   render() {
-    return <p>desde post</p>;
+    const { id, title } = this.props.data;
+    return (
+      <tr>
+        <td>{id}</td>
+        <td>{title}</td>
+        <td>
+          <Link to={`/posts/${id}`} className="btn btn-primary">
+            Ver
+          </Link>
+          <button type="button" className="btn btn-danger">
+            Borrar
+          </button>
+        </td>
+      </tr>
+    );
   }
 }
 
