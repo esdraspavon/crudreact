@@ -5,6 +5,7 @@ import Header from "./Header";
 import Navbar from "./Navbar";
 import Posts from "./Posts";
 import SinglePost from "./SinglePost";
+import Form from "./Form";
 
 class Router extends Component {
   state = {
@@ -65,6 +66,7 @@ class Router extends Component {
                   return <SinglePost post={filtro[0]} />;
                 }}
               />
+              <Route exact path="/crear" component={Form} />
             </Switch>
           </div>
         </div>
