@@ -35,7 +35,12 @@ class Router extends Component {
                 path="/posts/:postId"
                 render={props => {
                   let idPost = props.match.params.postId;
-                  return <SinglePost />;
+                  const posts = this.state.posts;
+
+                  let filtro;
+
+                  filtro = posts.filter(post => post.id === idPost);
+                  return <SinglePost post={filtro[0]} />;
                 }}
               />
             </Switch>
