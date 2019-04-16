@@ -39,7 +39,8 @@ class Router extends Component {
 
                   let filtro;
 
-                  filtro = posts.filter(post => post.id === idPost);
+                  // eslint-disable-next-line
+                  filtro = posts.filter(post => post.id == idPost);
                   return <SinglePost post={filtro[0]} />;
                 }}
               />
