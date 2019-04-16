@@ -11,10 +11,27 @@ class Router extends Component {
     posts: []
   };
   componentDidMount() {
+    this.getPosts();
+  }
+
+  getPosts = () => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts`)
       .then(resp => this.setState({ posts: resp.data }));
-  }
+  };
+
+  deletePost = id => {
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(resp => {
+        if (resp.status === 200) {
+          const posts = [...this.state.posts];
+          let result = posts.filter(post => post.id !== id);
+          this.setState({ posts: result });
+        }
+      });
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -27,7 +44,12 @@ class Router extends Component {
                 exact
                 path="/"
                 render={() => {
-                  return <Posts posts={this.state.posts} />;
+                  return (
+                    <Posts
+                      posts={this.state.posts}
+                      deletePost={this.deletePost}
+                    />
+                  );
                 }}
               />
               <Route
@@ -39,8 +61,7 @@ class Router extends Component {
 
                   let filtro;
 
-                  // eslint-disable-next-line
-                  filtro = posts.filter(post => post.id == idPost);
+                  filtro = posts.filter(post => post.id === Number(idPost));
                   return <SinglePost post={filtro[0]} />;
                 }}
               />

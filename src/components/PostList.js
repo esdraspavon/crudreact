@@ -7,7 +7,11 @@ class PostList extends Component {
     return (
       <React.Fragment>
         {Object.keys(posts).map(post => (
-          <Post key={post} data={this.props.posts[post]} />
+          <Post
+            key={post}
+            data={this.props.posts[post]}
+            deletePost={this.props.deletePost}
+          />
         ))}
       </React.Fragment>
     );

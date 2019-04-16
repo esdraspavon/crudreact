@@ -7,7 +7,7 @@ class Posts extends Component {
     return (
       <div className="col-12 col-md-8">
         <h2 className="text-center">Posts</h2>
-        <PostList posts={this.props.posts} />
+        <PostList posts={this.props.posts} deletePost={this.props.deletePost} />
       </div>
     );
   }
