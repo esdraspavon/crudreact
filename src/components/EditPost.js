@@ -38,6 +38,7 @@ class EditPost extends Component {
           <textarea
             className="form-control"
             placeholder="Contenido"
+            ref={this.contentRef}
             defaultValue={body}
           />
         </div>

@@ -58,15 +58,20 @@ class Router extends Component {
         postUpdated
       })
       .then(resp => {
-        if (resp.status === 201) {
-          Swal.fire("Post creado", "El post se creó correctamente!", "success");
-          //let postId = { id: resp.data.id };
-          //const newPost = Object.assign({}, resp.data.post, postId);
-          let newPost = resp.data.post;
-          newPost.id = resp.data.id;
-          this.setState(prevState => ({
-            posts: [...prevState.posts, newPost]
-          }));
+        if (resp.status === 200) {
+          Swal.fire(
+            "Post editado",
+            "El post se editó correctamente!",
+            "success"
+          );
+          let postId = resp.data.id;
+          const posts = [...this.state.posts];
+
+          let postToEdit = posts.findIndex(post => postId === post.id);
+
+          posts[postToEdit] = postUpdated;
+
+          this.setState({ posts });
         }
       });
   };
