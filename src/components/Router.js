@@ -51,6 +51,25 @@ class Router extends Component {
         }
       });
   };
+  editPost = postUpdated => {
+    const { id } = postUpdated;
+    axios
+      .put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        postUpdated
+      })
+      .then(resp => {
+        if (resp.status === 201) {
+          Swal.fire("Post creado", "El post se creó correctamente!", "success");
+          //let postId = { id: resp.data.id };
+          //const newPost = Object.assign({}, resp.data.post, postId);
+          let newPost = resp.data.post;
+          newPost.id = resp.data.id;
+          this.setState(prevState => ({
+            posts: [...prevState.posts, newPost]
+          }));
+        }
+      });
+  };
 
   render() {
     return (
@@ -104,7 +123,7 @@ class Router extends Component {
                   let filtro;
 
                   filtro = posts.filter(post => post.id === Number(idPost));
-                  return <EditPost post={filtro[0]} />;
+                  return <EditPost post={filtro[0]} editPost={this.editPost} />;
                 }}
               />
             </Switch>
