@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 import axios from "axios";
 import Header from "./Header";
 import Navbar from "./Navbar";
@@ -39,6 +39,7 @@ class Router extends Component {
       .post(`https://jsonplaceholder.typicode.com/posts`, { post })
       .then(resp => {
         if (resp.status === 201) {
+          Swal.fire("Post creado", "El post se creó correctamente!", "success");
           //let postId = { id: resp.data.id };
           //const newPost = Object.assign({}, resp.data.post, postId);
           let newPost = resp.data.post;
