@@ -31,6 +31,9 @@ class Post extends Component {
           <Link to={`/posts/${id}`} className="btn btn-primary">
             Ver
           </Link>
+          <Link to={`/editar/${id}`} className="btn btn-warning">
+            Editar
+          </Link>
           <button
             onClick={this.confirmDelete}
             type="button"

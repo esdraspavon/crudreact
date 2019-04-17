@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Posts from "./Posts";
 import SinglePost from "./SinglePost";
 import Form from "./Form";
+import EditPost from "./EditPost";
 
 class Router extends Component {
   state = {
@@ -84,11 +85,26 @@ class Router extends Component {
                   return <SinglePost post={filtro[0]} />;
                 }}
               />
+
               <Route
                 exact
                 path="/crear"
                 render={() => {
                   return <Form createPost={this.createPost} />;
+                }}
+              />
+
+              <Route
+                exact
+                path="/editar/:postId"
+                render={props => {
+                  let idPost = props.match.params.postId;
+                  const posts = this.state.posts;
+
+                  let filtro;
+
+                  filtro = posts.filter(post => post.id === Number(idPost));
+                  return <EditPost post={filtro[0]} />;
                 }}
               />
             </Switch>
